@@ -1,0 +1,98 @@
+/* RESET + BASE */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    background: #f4f6f9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* MAIN WRAPPER */
+.order-success-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* CARD */
+.order-success-card {
+    background: #fff;
+    max-width: 500px;
+    width: 100%;
+    padding: 35px 30px;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+/* ICON */
+.order-success-card .success-icon {
+    font-size: 60px;
+    color: #1fae0c;
+    margin-bottom: 15px;
+}
+
+/* HEADING */
+.order-success-card h2 {
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* DETAILS */
+.order-success-card p {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #444;
+}
+
+.order-success-card strong {
+    color: #000;
+}
+
+/* STATUS BADGE */
+.order-status {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    background: #e8f7ec;
+    color: #1fae0c;
+}
+
+/* BUTTON */
+.continue-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 26px;
+    background: #1fae0c;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+.continue-btn:hover {
+    background: #178009;
+}
+
+/* MOBILE */
+@media (max-width: 500px) {
+    .order-success-card {
+        padding: 30px 20px;
+    }
+
+    .order-success-card h2 {
+        font-size: 20px;
+    }
+}

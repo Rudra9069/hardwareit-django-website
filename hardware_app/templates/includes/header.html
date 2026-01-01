@@ -1,0 +1,48 @@
+{% load static %}
+        <nav>
+            <div class="container">
+
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="{% url 'home_page' %}">
+                        <img src="{% static 'img/logo/logo_1.png' %}" alt="Logo">
+                    </a>
+                </div>
+
+                <!-- Nav Bar -->
+                <ul>
+                    <li><a href="{% url 'home_page' %}" class="active">Home</a></li>
+                    <li><a href="{% url 'products_page' %}">Products</a></li>
+                    <li><a href="{% url 'about_page' %}">About</a></li>
+                    <li><a href="{% url 'contact_page' %}">Contact us</a></li>
+                    {% if myuser %}
+                    <li><a href="{% url 'cart_page' %}"> <i class="fa-solid fa-cart-arrow-down"></i> Cart </a></li>
+                    {% endif %}
+                </ul>
+
+                <!-- Search Bar -->
+                <form role="search" method="get" action="{% url 'products_page' %}">
+                    <input type="search" name="q" placeholder="Search products" aria-label="Search" value="{{ query }}">
+                    <button type="submit" class="btn-sc">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+
+                <!-- Log/Reg Links -->
+                <div class="auth-buttons">
+                    {% if myuser %}
+                    <button type="button" class="btn-logout" onclick="window.location.href='{% url 'logout' %}'">
+                        <i class="fa-solid fa-power-off"></i>
+                    </button>
+                    {% else %}
+                    <button type="button" class="btn-sign" onclick="window.location.href='{% url 'signup_page' %}'"> 
+                        Sign in
+                    </button>
+
+                    <button type="button" class="btn-log" onclick="window.location.href='{% url 'login_page' %}'">
+                            Login
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>

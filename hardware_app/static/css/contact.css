@@ -1,0 +1,125 @@
+
+
+/* HERO SECTION */
+.contact-hero {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* BACKGROUND IMAGE */
+.contact-hero img {
+    width: 100%;
+    height: 585px;
+    object-fit: cover;
+}
+
+.contact-header{
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.708);
+    border-radius: 20px;    
+    padding: 20px;
+}
+
+.contact-header h2, p{
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+}
+
+.contact-down{
+    position: absolute;
+    top: 55%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.708);
+    border-radius: 20px;    
+    padding: 20px;
+    text-align: left;
+    width: 550px;
+}
+
+.contact-down h2{
+    text-align: center;
+    font-weight: 900;
+}
+
+/* OVERLAY FORM */
+.contact-overlay {
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.57);
+    padding: 30px;
+    width: 100%;
+    max-width: 520px;
+    height: 100%;
+    max-height: 450px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    color: white;
+    text-align: center;
+}
+
+/* FORM ELEMENTS */
+.contact-overlay form {
+    position: relative;
+    top: 8%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.contact-overlay h2 {
+    margin-bottom: 20px;    
+}
+
+.contact-overlay input{
+    position: relative;
+    padding: 10px 15px;
+    border-radius: 10px;
+    width: 100%;
+    outline: none;
+}
+
+.contact-overlay textarea{
+    position: relative;
+    /* top: -20px; */
+    padding: 8px 15px 25px 15px;
+    border-radius: 10px;
+    width: 100%;
+    outline: none;
+}
+
+.contact-overlay button{
+    padding: 8px 15px;
+    border-radius: 10px;
+    position: relative;
+    top: -20px;
+    width: 100%;
+    outline: none;
+    background-color: rgb(207, 131, 17);
+    color: white;
+    font-size: 20px;
+    transition: 0.3s all ease-in;
+}
+
+.contact-overlay button:hover{
+    background-color: rgb(17, 150, 207);
+    color: white;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .contact-hero {
+        height: 90vh;
+    }
+}

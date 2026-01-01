@@ -1,0 +1,76 @@
+:root{
+    --radius:8px;
+    --card-shadow:0 4px 12px rgba(0,0,0,0.08);
+    /* --muted:#6c757d; */
+    --brand:#ff6b21
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;padding:0
+}
+
+body{
+    font-family:"Montserrat",sans-serif;
+    background-color:rgb(240,238,243);
+}
+
+/* Nav */
+nav{
+    background-color:rgb(20,20,20);
+    padding:15px 30px
+}
+
+nav .container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:0
+}
+
+.logo{
+    position:relative;
+    left:-8%;
+    display:flex;
+    align-items:center;
+    margin-right:0
+}
+
+.logo img{height:43px;display:block;border-radius:5px}
+
+nav ul{position:relative;left:-5%;list-style:none;display:flex;gap:20px;margin:0}
+
+nav ul li a{text-decoration:none;color:rgb(136,136,136);font-size:17px;font-weight:500;transition:0.4s}
+
+nav ul li a:hover{color:#fff}
+
+/* Search */
+
+form{display:flex;align-items:center;gap:8px}
+
+input[type="search"]{padding:6px 16px;border:1px solid #ccc;border-radius:15px;font-size:15px;outline:none;width:400px}
+
+.btn-sc{padding:6px 12px;border:none;background:#fff;color:#000;border-radius:20px;cursor:pointer;transition:all .3s}
+
+.btn-sc:hover{background-color:rgb(41, 41, 41);color:#fff}
+
+/* Auth buttons */
+
+.auth-buttons{position:relative;display:flex;gap:10px;left:5%;align-items:center;justify-content:flex-end}
+
+.btn-sign,.btn-log{padding:6px 16px;background:rgb(20,20,20);color:#fff;border:2px solid rgb(201,201,201);border-radius:25px;cursor:pointer;transition:.5s}
+
+.btn-sign:hover{background:#fff;border-color:#fff;color:#000}
+
+.btn-log:hover{background:rgb(43,190,27);border-color:rgb(43,190,27)}
+
+.btn-log{margin-left:0}
+
+.btn-logout{padding:6px 10px;background:rgb(191, 15, 15);border:1px solid rgb(137,15,15);border-radius:30px;cursor:pointer;transition:.5s}
+
+.btn-logout:hover{color:rgb(255, 255, 255)}
+
+/* Footer */
+footer{position:relative;background-color:rgb(20,20,20);color:#fff;height:40px}
+.foot-p{position:relative;top:7px;text-align:center;font-family:"Montserrat",sans-serif;font-size:18px}

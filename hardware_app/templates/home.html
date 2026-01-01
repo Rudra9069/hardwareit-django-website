@@ -1,0 +1,326 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400;0,900;1,400;1,900&family=Raleway:ital,wght@0,100;0,900;1,100;1,900&family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <title> HardwareIT — Home </title>
+        <!-- CSS Link -->
+         <link rel="stylesheet" href="{% static 'css/header.css' %}">
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+        <!-- Responsive CSS -->
+        <style>
+        @media (max-width: 768px) {
+          nav .container {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+
+          nav ul {
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+
+          form {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .btn-sign,
+          .btn-log {
+            width: 100%;
+            margin-top: 10px;
+          }
+        }
+        </style>
+
+    </head>
+    <body> 
+
+        <!-- Header -->
+        {% include 'includes/header.html' %}
+
+        <!-- Main -->
+        <main>
+
+          <!-- Image -->
+          <section class="s1"> 
+
+            <div class="image-box">
+
+              <div class="image-text"> 
+                <h2> Welcome, {{ myuser.name|default:"User" }} </h2>
+                <p>Your One-Stop Tool Solution.</p>
+              </div>
+
+              <img id="hero-image" src="{% static 'img/tool_img_11.jpg' %}" alt="Tool_img">
+
+              <button class="img-btn prev-btn"><i class="fa-solid fa-arrow-left"></i></button>
+              <button class="img-btn next-btn"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+          </section>
+
+
+          <!-- Trend Products -->
+
+          <section class="s2"> 
+            <div class="s2-h"> 
+              <p> Trending Products </p>
+            </div>
+          </section>
+
+          <section id="trending" class="section py-5">
+            <div class="container">
+              <div class="section-header d-flex justify-content-between align-items-center mb-4">
+                
+                <a href="{% url 'products_page' %}" class="link-more">See all</a>
+              </div>
+
+              <div class="row g-4">
+                <!-- CARD: repeat / loop in Django -->
+                <div class="col-6 col-md-4 col-lg-3">
+                  <div class="card product-card">
+                    <div class="card-media">
+                      <img src="{% static 'img/home_pg/trend1.jpg' %}" alt="Cordless Drill" loading="lazy" class="product-img">
+                      <!-- <span class="badge-sale">Hot</span> -->
+                    </div>
+                    <div class="card-body">
+                      <h5 class="product-title">Cordless Drill 18V</h5>
+                      <p class="product-desc">Compact, brushless motor</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="product-price">₹3,499</div>
+                        <a class="btn btn-sm btn-dark" href="{% url 'products_page' %}">View</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                  <div class="card product-card">
+                    <div class="card-media">
+                      <img src="{% static 'img/home_pg/trend2.jpg' %}" loading="lazy" alt="Hammer" class="product-img">
+                    </div>
+                    <div class="card-body">
+                      <h5 class="product-title">Claw Hammer</h5>
+                      <p class="product-desc">Forged steel, anti-slip handle</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="product-price">₹599</div>
+                        <a class="btn btn-sm btn-dark" href="{% url 'products_page' %}">View</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                  <div class="card product-card">
+                    <div class="card-media">
+                      <img src="{% static 'img/home_pg/trend3.jpg' %}" loading="lazy" alt="Precision Screwdriver Set" class="product-img">
+                    </div>
+                    <div class="card-body">
+                      <h5 class="product-title">Screwdriver Set (10)</h5>
+                      <p class="product-desc">Magnetic tips, organized case</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="product-price">₹799</div>
+                        <a class="btn btn-sm btn-dark" href="{% url 'products_page' %}">View</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                  <div class="card product-card">
+                    <div class="card-media">
+                      <img src="{% static 'img/home_pg/trend4.jpg' %}" loading="lazy" alt="Angle Grinder" class="product-img">
+                    </div>
+                    <div class="card-body">
+                      <h5 class="product-title">Angle Grinder 125mm</h5>
+                      <p class="product-desc">Powerful and compact</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="product-price">₹1,799</div>
+                        <a class="btn btn-sm btn-dark" href="{% url 'products_page' %}">View</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end cards -->
+              </div>
+            </div>
+          </section>
+
+          <!-- New arrivals-->
+          <section class="s3"> 
+            <div class="s3-h"> 
+              <p> New Arrivals </p>
+            </div>
+          </section>
+
+          <section id="new-arrivals" class="section py-5">
+          <div class="container">
+            <div class="section-header d-flex justify-content-between align-items-center mb-4">
+              <a href="{% url 'products_page' %}" class="link-more">View new</a>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-6 col-md-3">
+                <div class="card product-card">
+                  <div class="card-media">
+                    <img src="{% static 'img/home_pg/new1.jpg' %}" loading="lazy" alt="Precision Wrench" class="product-img">
+                    <!-- <span class="badge-new">New</span> -->
+                  </div>
+                  <div class="card-body">
+                    <h5 class="product-title">Precision Wrench</h5>
+                    <p class="product-desc">Slim profile for tight spaces</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="product-price">₹1,199</div>
+                      <a class="btn btn-sm btn-outline-dark" href="{% url 'products_page' %}">Shop</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-3">
+                <div class="card product-card">
+                  <div class="card-media">
+                    <img src="{% static 'img/home_pg/new2.jpg' %}" loading="lazy" alt="Cordless Cutter" class="product-img">
+                  </div>
+                  <div class="card-body">
+                    <h5 class="product-title">Cordless Cutter</h5>
+                    <p class="product-desc">Ergonomic grip</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="product-price">₹2,299</div>
+                      <a class="btn btn-sm btn-outline-dark" href="{% url 'products_page' %}">Shop</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-3">
+                <div class="card product-card">
+                  <div class="card-media">
+                    <img src="{% static 'img/home_pg/new3.jpg' %}" loading="lazy" alt="Workshop Light" class="product-img">
+                  </div>
+                  <div class="card-body">
+                    <h5 class="product-title">LED Workshop Light</h5>
+                    <p class="product-desc">Bright and energy efficient</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="product-price">₹899</div>
+                      <a class="btn btn-sm btn-outline-dark" href="{% url 'products_page' %}">Shop</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-3">
+                <div class="card product-card">
+                  <div class="card-media">
+                    <img src="{% static 'img/home_pg/new4.jpg' %}" loading="lazy" alt="Tape Measure" class="product-img">
+                  </div>
+                  <div class="card-body">
+                    <h5 class="product-title">Tape Measure 8m</h5>
+                    <p class="product-desc">Shockproof case</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="product-price">₹249</div>
+                      <a class="btn btn-sm btn-outline-dark" href="{% url 'products_page' %}">Shop</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+          <!-- Popular category -->
+          <section class="s4 py-5"> 
+          <div class="s4-h"> 
+            <p>Popular Categories</p>
+          </div>
+
+          <div class="container my-5">
+            <div class="row g-4 justify-content-center">
+
+              <!-- Category 1 -->
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card category-card border-0 shadow-sm position-relative overflow-hidden">
+                  <img src="{% static 'img/home_pg/catg_img_1.jpg' %}" loading="lazy" class="card-img fixed-img" alt="Bathroom Accessories">
+                  <div class="category-overlay">
+                    <h5 class="mb-0">Bathroom Accessories</h5>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Category 2 -->
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card category-card border-0 shadow-sm position-relative overflow-hidden">
+                  <img src="{% static 'img/home_pg/catg_img_2.jpg' %}" loading="lazy" class="card-img fixed-img" alt="Door Locks">
+                  <div class="category-overlay">
+                    <h5 class="mb-0">Door Locks</h5>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Category 3 -->
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card category-card border-0 shadow-sm position-relative overflow-hidden">
+                  <img src="{% static 'img/home_pg/catg_img_3.jpg' %}" loading="lazy" class="card-img fixed-img" alt="Kitchen Supplies">
+                  <div class="category-overlay">
+                    <h5 class="mb-0">Kitchen Supplies</h5>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Category 4 -->
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card category-card border-0 shadow-sm position-relative overflow-hidden">
+                  <img src="{% static 'img/home_pg/catg_img_4.jpg' %}" loading="lazy" class="card-img fixed-img" alt="Door Locks">
+                  <div class="category-overlay">
+                    <h5 class="mb-0">Hardware Accessories</h5>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          </section>
+
+
+        </main>
+
+        <!-- Footer -->
+        {% include 'includes/footer.html' %}
+
+        <script>
+            const images = [
+                "{% static 'img/tool_img_11.jpg' %}",
+                "{% static 'img/tool_img_22.jpg' %}",
+                "{% static 'img/tool_img_33.jpg' %}",
+              ];
+
+              let current = 0;
+              const img = document.getElementById("hero-image");
+
+              function changeImage(nextIndex) {
+                img.style.opacity = 0; // fade out
+                setTimeout(() => {
+                  img.src = images[nextIndex];
+                  img.onload = () => { img.style.opacity = 1; }; // fade in when loaded
+                }, 400); // matches half of transition time
+              }
+
+              document.querySelector(".next-btn").addEventListener("click", () => {
+                current = (current + 1) % images.length;
+                changeImage(current);
+              });
+
+              document.querySelector(".prev-btn").addEventListener("click", () => {
+                current = (current - 1 + images.length) % images.length;
+                changeImage(current);
+              });
+        </script>
+    </body>
+</html>
