@@ -1,326 +1,549 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400;0,900;1,400;1,900&family=Raleway:ital,wght@0,100;0,900;1,100;1,900&family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <title> HardwareIT — Home </title>
-        <!-- CSS Link -->
-         <link rel="stylesheet" href="{% static 'css/header.css' %}">
-        <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
-        <!-- Responsive CSS -->
-        <style>
-        @media (max-width: 768px) {
-          nav .container {
-            flex-direction: column;
-            align-items: flex-start;
-          }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat&family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400;0,900;1,400;1,900&family=Raleway:ital,wght@0,100;0,900;1,100;1,900&family=Special+Gothic+Expanded+One&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title> HardwareIT — Home </title>
+  <!-- CSS Link -->
+  <link rel="stylesheet" href="{% static 'css/header.css' %}">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
-          nav ul {
-            flex-wrap: wrap;
-            justify-content: center;
-          }
+  <!-- Responsive CSS -->
+  <style>
+    @media (max-width: 768px) {
+      nav .container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-          form {
-            width: 100%;
-            justify-content: center;
-          }
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
-          .btn-sign,
-          .btn-log {
-            width: 100%;
-            margin-top: 10px;
-          }
+      form {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .btn-sign,
+      .btn-log {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Splash Screen -->
+  <div id="splash-screen">
+    <img id="splash-logo" src="{% static 'img/logo/logo_1.png' %}" alt="HardwareIT Logo">
+  </div>
+
+  <style>
+    /* Splash Screen Styles */
+    #splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(20, 20, 20);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    #splash-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #splash-logo {
+      height: 100px;
+      border-radius: 10px;
+      position: fixed;
+      /* Will be set by JavaScript on load */
+      transition: top 1s cubic-bezier(0.4, 0, 0.2, 1),
+        left 1s cubic-bezier(0.4, 0, 0.2, 1),
+        height 1s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: slideUpFade 1.0s ease-out forwards, pulse 1.5s ease-in 0.8s infinite;
+      z-index: 10000;
+    }
+
+    #splash-logo.move-to-header {
+      animation: none;
+    }
+
+    /* Entrance animation - Slide Up + Fade */
+    @keyframes slideUpFade {
+      0% {
+        opacity: 0;
+        transform: translateY(350px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+    }
+
+    /* Hide header logo initially */
+    .logo-hidden {
+      opacity: 0 !important;
+    }
+
+    .logo-visible {
+      opacity: 1 !important;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Body scroll lock during splash */
+    body.splash-active {
+      overflow: hidden;
+    }
+  </style>
+
+  <!-- Header -->
+  {% include 'includes/header.html' %}
+
+  <!-- Main -->
+  <main>
+
+    <!-- Image -->
+    <section class="s1">
+
+      <div class="image-box">
+
+        <div class="image-text">
+          <h2> Welcome, {{ myuser.name|default:"User" }} </h2>
+          <p>Your One-Stop Tool Solution.</p>
+        </div>
+
+        <img id="hero-image" src="{% static 'img/tool_img_11.webp' %}" alt="Tool_img">
+
+        <button class="img-btn prev-btn"><i class="fa-solid fa-arrow-left"></i></button>
+        <button class="img-btn next-btn"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+
+    </section>
+
+
+    <!-- Trend Products -->
+
+    <section class="s2">
+      <div class="s2-h">
+        <p> Trending Products </p>
+      </div>
+    </section>
+
+    <section id="trending" class="section py-5">
+      <div class="container">
+        <div class="section-header d-flex justify-content-between align-items-center mb-4">
+
+          <a href="{% url 'products_page' %}" class="link-more">See all</a>
+        </div>
+
+        <div class="row g-4">
+          <!-- CARD: repeat / loop in Django -->
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="card-media">
+                <img src="{% static 'img/home_pg/trend1.webp' %}" alt="Cordless Drill" loading="lazy"
+                  class="product-img">
+                <!-- <span class="badge-sale">Hot</span> -->
+              </div>
+              <div class="card-body">
+                <h5 class="product-title">Cordless Drill 18V</h5>
+                <p class="product-desc">Compact, brushless motor</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="product-price">₹3,499</div>
+                  <a class="btn btn-sm btn-dark" href="{% url 'products_page' %}">View</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="card-media">
+                <img src="{% static 'img/home_pg/trend2.webp' %}" loading="lazy" alt="Hammer" class="product-img">
+              </div>
+              <div class="card-body">
+                <h5 class="product-title">Claw Hammer</h5>
+                <p class="product-desc">Forged steel, anti-slip handle</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="product-price">₹599</div>
+                  <a class="btn btn-sm btn-dark" href="{% url 'products_page' %}">View</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="card-media">
+                <img src="{% static 'img/home_pg/trend3.webp' %}" loading="lazy" alt="Precision Screwdriver Set"
+                  class="product-img">
+              </div>
+              <div class="card-body">
+                <h5 class="product-title">Screwdriver Set (10)</h5>
+                <p class="product-desc">Magnetic tips, organized case</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="product-price">₹799</div>
+                  <a class="btn btn-sm btn-dark" href="{% url 'products_page' %}">View</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="card-media">
+                <img src="{% static 'img/home_pg/trend4.webp' %}" loading="lazy" alt="Angle Grinder"
+                  class="product-img">
+              </div>
+              <div class="card-body">
+                <h5 class="product-title">Angle Grinder 125mm</h5>
+                <p class="product-desc">Powerful and compact</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="product-price">₹1,799</div>
+                  <a class="btn btn-sm btn-dark" href="{% url 'products_page' %}">View</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- New arrivals-->
+    <section class="s3">
+      <div class="s3-h">
+        <p> New Arrivals </p>
+      </div>
+    </section>
+
+    <section id="new-arrivals" class="section py-5">
+      <div class="container">
+        <div class="section-header d-flex justify-content-between align-items-center mb-4">
+          <a href="{% url 'products_page' %}" class="link-more">View new</a>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-6 col-md-3">
+            <div class="card product-card">
+              <div class="card-media">
+                <img src="{% static 'img/home_pg/new1.webp' %}" loading="lazy" alt="Precision Wrench"
+                  class="product-img">
+                <!-- <span class="badge-new">New</span> -->
+              </div>
+              <div class="card-body">
+                <h5 class="product-title">Precision Wrench</h5>
+                <p class="product-desc">Slim profile for tight spaces</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="product-price">₹1,199</div>
+                  <a class="btn btn-sm btn-outline-dark" href="{% url 'products_page' %}">Shop</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="card product-card">
+              <div class="card-media">
+                <img src="{% static 'img/home_pg/new2.webp' %}" loading="lazy" alt="Cordless Cutter"
+                  class="product-img">
+              </div>
+              <div class="card-body">
+                <h5 class="product-title">Cordless Cutter</h5>
+                <p class="product-desc">Ergonomic grip</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="product-price">₹2,299</div>
+                  <a class="btn btn-sm btn-outline-dark" href="{% url 'products_page' %}">Shop</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="card product-card">
+              <div class="card-media">
+                <img src="{% static 'img/home_pg/new3.webp' %}" loading="lazy" alt="Workshop Light" class="product-img">
+              </div>
+              <div class="card-body">
+                <h5 class="product-title">LED Workshop Light</h5>
+                <p class="product-desc">Bright and energy efficient</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="product-price">₹899</div>
+                  <a class="btn btn-sm btn-outline-dark" href="{% url 'products_page' %}">Shop</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="card product-card">
+              <div class="card-media">
+                <img src="{% static 'img/home_pg/new4.webp' %}" loading="lazy" alt="Tape Measure" class="product-img">
+              </div>
+              <div class="card-body">
+                <h5 class="product-title">Tape Measure 8m</h5>
+                <p class="product-desc">Shockproof case</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="product-price">₹249</div>
+                  <a class="btn btn-sm btn-outline-dark" href="{% url 'products_page' %}">Shop</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular category -->
+    <section class="s4 py-5">
+      <div class="s4-h">
+        <p>Popular Categories</p>
+      </div>
+
+      <div class="container my-5">
+        <div class="row g-4 justify-content-center">
+
+          <!-- Category 1 -->
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card category-card border-0 shadow-sm position-relative overflow-hidden">
+              <img src="{% static 'img/home_pg/catg_img_1.webp' %}" loading="lazy" class="card-img fixed-img"
+                alt="Bathroom Accessories">
+              <div class="category-overlay">
+                <h5 class="mb-0">Bathroom Accessories</h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card category-card border-0 shadow-sm position-relative overflow-hidden">
+              <img src="{% static 'img/home_pg/catg_img_2.webp' %}" loading="lazy" class="card-img fixed-img"
+                alt="Door Locks">
+              <div class="category-overlay">
+                <h5 class="mb-0">Door Locks</h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card category-card border-0 shadow-sm position-relative overflow-hidden">
+              <img src="{% static 'img/home_pg/catg_img_3.webp' %}" loading="lazy" class="card-img fixed-img"
+                alt="Kitchen Supplies">
+              <div class="category-overlay">
+                <h5 class="mb-0">Kitchen Supplies</h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 4 -->
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card category-card border-0 shadow-sm position-relative overflow-hidden">
+              <img src="{% static 'img/home_pg/catg_img_4.webp' %}" loading="lazy" class="card-img fixed-img"
+                alt="Door Locks">
+              <div class="category-overlay">
+                <h5 class="mb-0">Hardware Accessories</h5>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" id="scrollToTop" title="Go to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Footer -->
+  {% include 'includes/footer.html' %}
+
+  <!-- Hero Slideshow Script -->
+  <script>
+    const images = [
+      "{% static 'img/tool_img_11.webp' %}",
+      "{% static 'img/tool_img_22.webp' %}",
+      "{% static 'img/tool_img_33.webp' %}",
+    ];
+
+    let current = 0;
+    let autoSlideInterval;
+    const img = document.getElementById("hero-image");
+
+    function changeImage(nextIndex) {
+      img.style.opacity = 0; // fade out
+      setTimeout(() => {
+        img.src = images[nextIndex];
+        img.onload = () => { img.style.opacity = 1; }; // fade in when loaded
+      }, 400); // matches half of transition time
+    }
+
+    function nextSlide() {
+      current = (current + 1) % images.length;
+      changeImage(current);
+    }
+
+    function prevSlide() {
+      current = (current - 1 + images.length) % images.length;
+      changeImage(current);
+    }
+
+    // Auto slideshow - change every 5 seconds
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextSlide, 5000);
+    }
+
+    // Pause auto slide on manual navigation
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      startAutoSlide();
+    }
+
+    document.querySelector(".next-btn").addEventListener("click", () => {
+      nextSlide();
+      resetAutoSlide();
+    });
+
+    document.querySelector(".prev-btn").addEventListener("click", () => {
+      prevSlide();
+      resetAutoSlide();
+    });
+
+    // Start auto slideshow
+    startAutoSlide();
+  </script>
+
+  <!-- Scroll to Top Script -->
+  <script>
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollToTopBtn.classList.add('visible');
+      } else {
+        scrollToTopBtn.classList.remove('visible');
+      }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+  <!-- Splash Screen Animation Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const splashScreen = document.getElementById('splash-screen');
+      const splashLogo = document.getElementById('splash-logo');
+      const headerLogo = document.querySelector('.logo img');
+
+      // Check if user came from another page on the same site (internal navigation)
+      const referrer = document.referrer;
+      const currentHost = window.location.host;
+      const isInternalNavigation = referrer && referrer.includes(currentHost) && !referrer.includes(window.location.pathname);
+
+      // Skip splash if navigating from another page on the site (but show on refresh or first load)
+      if (isInternalNavigation) {
+        splashScreen.style.display = 'none';
+        return;
+      }
+
+      // Lock body scroll during splash
+      document.body.classList.add('splash-active');
+
+      // Hide header logo initially
+      if (headerLogo) {
+        headerLogo.classList.add('logo-hidden');
+      }
+
+      // Set initial center position (without using transform for centering)
+      const logoHeight = 100; // Initial height
+      const logoWidth = splashLogo.offsetWidth || logoHeight; // Get actual width
+      const centerTop = (window.innerHeight - logoHeight) / 2;
+      const centerLeft = (window.innerWidth - logoWidth) / 2;
+
+      splashLogo.style.top = centerTop + 'px';
+      splashLogo.style.left = centerLeft + 'px';
+
+      // Wait for a moment, then animate logo to header
+      setTimeout(function () {
+        if (headerLogo) {
+          // Get header logo position
+          const headerRect = headerLogo.getBoundingClientRect();
+
+          // Stop pulse animation
+          splashLogo.classList.add('move-to-header');
+
+          // Calculate target position (exact position of header logo)
+          const targetTop = headerRect.top;
+          const targetLeft = headerRect.left - 7;
+          const targetHeight = headerRect.height;
+
+          // Apply new position - this will animate due to CSS transition
+          splashLogo.style.top = targetTop + 'px';
+          splashLogo.style.left = targetLeft + 'px';
+          splashLogo.style.height = targetHeight + 'px';
+
+          // After logo animation completes, fade out splash screen
+          setTimeout(function () {
+            splashScreen.classList.add('fade-out');
+
+            // Show header logo
+            headerLogo.classList.remove('logo-hidden');
+            headerLogo.classList.add('logo-visible');
+
+            // Unlock body scroll
+            document.body.classList.remove('splash-active');
+
+            // Remove splash screen from DOM after fade
+            setTimeout(function () {
+              splashScreen.style.display = 'none';
+            }, 500);
+          }, 1000); // Wait for move animation to complete
         }
-        </style>
+      }, 1500); // Wait 1.5 seconds before starting animation
+    });
+  </script>
+</body>
 
-    </head>
-    <body> 
-
-        <!-- Header -->
-        {% include 'includes/header.html' %}
-
-        <!-- Main -->
-        <main>
-
-          <!-- Image -->
-          <section class="s1"> 
-
-            <div class="image-box">
-
-              <div class="image-text"> 
-                <h2> Welcome, {{ myuser.name|default:"User" }} </h2>
-                <p>Your One-Stop Tool Solution.</p>
-              </div>
-
-              <img id="hero-image" src="{% static 'img/tool_img_11.jpg' %}" alt="Tool_img">
-
-              <button class="img-btn prev-btn"><i class="fa-solid fa-arrow-left"></i></button>
-              <button class="img-btn next-btn"><i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-
-          </section>
-
-
-          <!-- Trend Products -->
-
-          <section class="s2"> 
-            <div class="s2-h"> 
-              <p> Trending Products </p>
-            </div>
-          </section>
-
-          <section id="trending" class="section py-5">
-            <div class="container">
-              <div class="section-header d-flex justify-content-between align-items-center mb-4">
-                
-                <a href="{% url 'products_page' %}" class="link-more">See all</a>
-              </div>
-
-              <div class="row g-4">
-                <!-- CARD: repeat / loop in Django -->
-                <div class="col-6 col-md-4 col-lg-3">
-                  <div class="card product-card">
-                    <div class="card-media">
-                      <img src="{% static 'img/home_pg/trend1.jpg' %}" alt="Cordless Drill" loading="lazy" class="product-img">
-                      <!-- <span class="badge-sale">Hot</span> -->
-                    </div>
-                    <div class="card-body">
-                      <h5 class="product-title">Cordless Drill 18V</h5>
-                      <p class="product-desc">Compact, brushless motor</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="product-price">₹3,499</div>
-                        <a class="btn btn-sm btn-dark" href="{% url 'products_page' %}">View</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-6 col-md-4 col-lg-3">
-                  <div class="card product-card">
-                    <div class="card-media">
-                      <img src="{% static 'img/home_pg/trend2.jpg' %}" loading="lazy" alt="Hammer" class="product-img">
-                    </div>
-                    <div class="card-body">
-                      <h5 class="product-title">Claw Hammer</h5>
-                      <p class="product-desc">Forged steel, anti-slip handle</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="product-price">₹599</div>
-                        <a class="btn btn-sm btn-dark" href="{% url 'products_page' %}">View</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-6 col-md-4 col-lg-3">
-                  <div class="card product-card">
-                    <div class="card-media">
-                      <img src="{% static 'img/home_pg/trend3.jpg' %}" loading="lazy" alt="Precision Screwdriver Set" class="product-img">
-                    </div>
-                    <div class="card-body">
-                      <h5 class="product-title">Screwdriver Set (10)</h5>
-                      <p class="product-desc">Magnetic tips, organized case</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="product-price">₹799</div>
-                        <a class="btn btn-sm btn-dark" href="{% url 'products_page' %}">View</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-6 col-md-4 col-lg-3">
-                  <div class="card product-card">
-                    <div class="card-media">
-                      <img src="{% static 'img/home_pg/trend4.jpg' %}" loading="lazy" alt="Angle Grinder" class="product-img">
-                    </div>
-                    <div class="card-body">
-                      <h5 class="product-title">Angle Grinder 125mm</h5>
-                      <p class="product-desc">Powerful and compact</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="product-price">₹1,799</div>
-                        <a class="btn btn-sm btn-dark" href="{% url 'products_page' %}">View</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- end cards -->
-              </div>
-            </div>
-          </section>
-
-          <!-- New arrivals-->
-          <section class="s3"> 
-            <div class="s3-h"> 
-              <p> New Arrivals </p>
-            </div>
-          </section>
-
-          <section id="new-arrivals" class="section py-5">
-          <div class="container">
-            <div class="section-header d-flex justify-content-between align-items-center mb-4">
-              <a href="{% url 'products_page' %}" class="link-more">View new</a>
-            </div>
-
-            <div class="row g-4">
-              <div class="col-6 col-md-3">
-                <div class="card product-card">
-                  <div class="card-media">
-                    <img src="{% static 'img/home_pg/new1.jpg' %}" loading="lazy" alt="Precision Wrench" class="product-img">
-                    <!-- <span class="badge-new">New</span> -->
-                  </div>
-                  <div class="card-body">
-                    <h5 class="product-title">Precision Wrench</h5>
-                    <p class="product-desc">Slim profile for tight spaces</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="product-price">₹1,199</div>
-                      <a class="btn btn-sm btn-outline-dark" href="{% url 'products_page' %}">Shop</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-6 col-md-3">
-                <div class="card product-card">
-                  <div class="card-media">
-                    <img src="{% static 'img/home_pg/new2.jpg' %}" loading="lazy" alt="Cordless Cutter" class="product-img">
-                  </div>
-                  <div class="card-body">
-                    <h5 class="product-title">Cordless Cutter</h5>
-                    <p class="product-desc">Ergonomic grip</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="product-price">₹2,299</div>
-                      <a class="btn btn-sm btn-outline-dark" href="{% url 'products_page' %}">Shop</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-6 col-md-3">
-                <div class="card product-card">
-                  <div class="card-media">
-                    <img src="{% static 'img/home_pg/new3.jpg' %}" loading="lazy" alt="Workshop Light" class="product-img">
-                  </div>
-                  <div class="card-body">
-                    <h5 class="product-title">LED Workshop Light</h5>
-                    <p class="product-desc">Bright and energy efficient</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="product-price">₹899</div>
-                      <a class="btn btn-sm btn-outline-dark" href="{% url 'products_page' %}">Shop</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-6 col-md-3">
-                <div class="card product-card">
-                  <div class="card-media">
-                    <img src="{% static 'img/home_pg/new4.jpg' %}" loading="lazy" alt="Tape Measure" class="product-img">
-                  </div>
-                  <div class="card-body">
-                    <h5 class="product-title">Tape Measure 8m</h5>
-                    <p class="product-desc">Shockproof case</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="product-price">₹249</div>
-                      <a class="btn btn-sm btn-outline-dark" href="{% url 'products_page' %}">Shop</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-          <!-- Popular category -->
-          <section class="s4 py-5"> 
-          <div class="s4-h"> 
-            <p>Popular Categories</p>
-          </div>
-
-          <div class="container my-5">
-            <div class="row g-4 justify-content-center">
-
-              <!-- Category 1 -->
-              <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card category-card border-0 shadow-sm position-relative overflow-hidden">
-                  <img src="{% static 'img/home_pg/catg_img_1.jpg' %}" loading="lazy" class="card-img fixed-img" alt="Bathroom Accessories">
-                  <div class="category-overlay">
-                    <h5 class="mb-0">Bathroom Accessories</h5>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Category 2 -->
-              <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card category-card border-0 shadow-sm position-relative overflow-hidden">
-                  <img src="{% static 'img/home_pg/catg_img_2.jpg' %}" loading="lazy" class="card-img fixed-img" alt="Door Locks">
-                  <div class="category-overlay">
-                    <h5 class="mb-0">Door Locks</h5>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Category 3 -->
-              <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card category-card border-0 shadow-sm position-relative overflow-hidden">
-                  <img src="{% static 'img/home_pg/catg_img_3.jpg' %}" loading="lazy" class="card-img fixed-img" alt="Kitchen Supplies">
-                  <div class="category-overlay">
-                    <h5 class="mb-0">Kitchen Supplies</h5>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Category 4 -->
-              <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card category-card border-0 shadow-sm position-relative overflow-hidden">
-                  <img src="{% static 'img/home_pg/catg_img_4.jpg' %}" loading="lazy" class="card-img fixed-img" alt="Door Locks">
-                  <div class="category-overlay">
-                    <h5 class="mb-0">Hardware Accessories</h5>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          </section>
-
-
-        </main>
-
-        <!-- Footer -->
-        {% include 'includes/footer.html' %}
-
-        <script>
-            const images = [
-                "{% static 'img/tool_img_11.jpg' %}",
-                "{% static 'img/tool_img_22.jpg' %}",
-                "{% static 'img/tool_img_33.jpg' %}",
-              ];
-
-              let current = 0;
-              const img = document.getElementById("hero-image");
-
-              function changeImage(nextIndex) {
-                img.style.opacity = 0; // fade out
-                setTimeout(() => {
-                  img.src = images[nextIndex];
-                  img.onload = () => { img.style.opacity = 1; }; // fade in when loaded
-                }, 400); // matches half of transition time
-              }
-
-              document.querySelector(".next-btn").addEventListener("click", () => {
-                current = (current + 1) % images.length;
-                changeImage(current);
-              });
-
-              document.querySelector(".prev-btn").addEventListener("click", () => {
-                current = (current - 1 + images.length) % images.length;
-                changeImage(current);
-              });
-        </script>
-    </body>
 </html>
